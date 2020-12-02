@@ -1,5 +1,6 @@
 public class Lists<L> {
 
+
     public IndividualNode<L> head = null;
 
     public void addElement(L e){
@@ -22,5 +23,22 @@ public class Lists<L> {
             current = current.next;
         }
         return list;
+    }
+
+    public String listPoliticians(){
+        if(head == null){
+            return "no politicians found...";
+        }
+        else{
+            String listOfPolis = "";
+            for(IndividualNode temp = head; temp != null; temp = temp.next){
+                listOfPolis = listOfPolis + temp + temp.getContents() + ": " + "\n";
+            }
+            return listOfPolis;
+        }
+    }
+
+    public void deleteAllPolis() {
+        head = null;
     }
 }
