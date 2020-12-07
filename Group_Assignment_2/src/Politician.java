@@ -13,7 +13,7 @@ public class Politician {
         this.county = county;
     }
 
-    //getters = setters//
+    //getters + setters//
 
     public String getName() {
         return name;

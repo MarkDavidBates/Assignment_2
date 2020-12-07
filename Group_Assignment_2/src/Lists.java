@@ -38,7 +38,7 @@ public class Lists<L> {
         }
     }
 
-    public void deleteAllPolis() {
+    public void deleteAll() {
         head = null;
     }
 }

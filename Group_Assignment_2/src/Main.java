@@ -32,6 +32,9 @@ public class Main {
                 case 3:
                     deleteAllPoliticians();
                     break;
+                case 4:
+                    startElection();
+                    break;
             }
         }
         while(answer != 0);
@@ -41,21 +44,22 @@ public class Main {
         System.out.println("1) add Politician");
         System.out.println("2) list Politicians");
         System.out.println("3)Delete all Politicians");
+        System.out.println("4) Start Election");
         System.out.println("0) exit");
         return ScannerInput.readNextInt("==>>");
     }
 
     public void addPolitician(){
-        System.out.println("[Name]: ");
+        System.out.println("Name: ");
         String name = input.next();
-        System.out.println("[Date of Birth]; ");
+        System.out.println("Date of Birth; ");
         String dob = input.next();
-        System.out.println("[Party]: ");
+        System.out.println("Party: ");
         String party = input.next();
-        System.out.println("[County]: ");
+        System.out.println("County: ");
         String county = input.next();
 
-        Politician p = new Politician(name, dob, party, county); //to be fixed
+        Politician p = new Politician(name, dob, party, county);
         politicians.addElement(p);
     }
 
@@ -65,7 +69,18 @@ public class Main {
     }
 
     public void deleteAllPoliticians(){
-        politicians.deleteAllPolis();
+        politicians.deleteAll();
         System.out.println("All politicians deleted!");
+    }
+
+    public void startElection(){
+        System.out.println("Election Type: ");
+        String type = input.next();
+        System.out.println("Election Location: ");
+        String location = input.next();
+        int year = ScannerInput.readNextInt("Year: ");
+        int seats = ScannerInput.readNextInt("Number of seats: ");
+
+        Election e = new Election(type, location, year, seats);
     }
 }
