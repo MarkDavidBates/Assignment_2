@@ -1,3 +1,11 @@
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class Lists<L> {
 
 
@@ -40,5 +48,19 @@ public class Lists<L> {
 
     public void deleteAll() {
         head = null;
+    }
+
+    public void load() throws Exception{
+        XStream xstream = new XStream(new DomDriver());
+        ObjectInputStream is = xstream.createObjectInputStream(new FileReader("data.xml"));
+        politicians = (Lists<Politician>) is.readObject();
+        is.close();
+    }
+
+    public void save() throws Exception{
+        XStream xstream = new XStream(new DomDriver());
+        ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("data.xml"));
+        out.writeObject();
+        out.close();
     }
 }

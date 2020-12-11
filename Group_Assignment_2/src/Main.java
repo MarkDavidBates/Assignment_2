@@ -1,3 +1,10 @@
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Main {
@@ -35,6 +42,10 @@ public class Main {
                 case 4:
                     startElection();
                     break;
+                case 5:
+                    try{
+                        politicians.save();
+                    }
             }
         }
         while(answer != 0);
@@ -83,4 +94,18 @@ public class Main {
 
         Election e = new Election(type, location, year, seats);
     }
+
+    public void load() throws Exception{
+     XStream xstream = new XStream(new DomDriver());
+     ObjectInputStream is = xstream.createObjectInputStream(new FileReader("data.xml"));
+     politicians = (Lists<Politician>) is.readObject();
+     is.close();
+     }
+
+     public void save() throws Exception{
+     XStream xstream = new XStream(new DomDriver());
+     ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("data.xml"));
+     out.writeObject(politicians);
+     out.close();
+     }
 }

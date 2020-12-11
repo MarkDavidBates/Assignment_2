@@ -1,3 +1,5 @@
+import jdk.jshell.execution.Util;
+
 public class Politician {
 
     private String name;
@@ -7,10 +9,10 @@ public class Politician {
     //photo or image of politician is needed too
 
     public Politician(String name, String dob, String party, String county){
-        this. name = name;
+        this. name = Utilities.max30Chars(name);
         this.dob = dob;
-        this.party = party;
-        this.county = county;
+        this.party = Utilities.validParty(party);
+        this.county = Utilities.max30Chars(county);
     }
 
     //getters + setters//
@@ -20,7 +22,7 @@ public class Politician {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = Utilities.max30Chars(name);
     }
 
     public String getDob() {
@@ -36,7 +38,7 @@ public class Politician {
     }
 
     public void setParty(String party) {
-        this.party = party;
+        this.party = Utilities.validParty(party);
     }
 
     public String getCounty() {
@@ -44,7 +46,7 @@ public class Politician {
     }
 
     public void setCounty(String county) {
-        this.county = county;
+        this.county = Utilities.max30Chars(county);
     }
 
     @Override

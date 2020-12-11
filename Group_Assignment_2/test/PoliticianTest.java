@@ -25,26 +25,26 @@ public class PoliticianTest {
         assertEquals("Mark", poli1.getName());
         poli1.setName("David");
         assertEquals("David", poli1.getName());
-        poli1.setName("AAAAAAAAAAAAAAAAAAAAAAAA");
-        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAA", poli1.getName());
+        poli1.setName("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", poli1.getName());
 
         assertEquals("03/02/01", poli1.getDob());
         poli1.setDob("05/01/99");
         assertEquals("05/01/99", poli1.getDob());
-        poli1.setDob("AAAAAAAAAAAAAAAAAAAAAAAA");
-        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAA", poli1.getDob());
+        poli1.setDob("05/01/09");
+        assertEquals("05/01/09", poli1.getDob());
 
         assertEquals("independent", poli1.getParty());
         poli1.setParty("Labour");
-        assertEquals("Labour", poli1.getParty());
-        poli1.setParty("AAAAAAAAAAAAAAAAAAAAAAAA");
-        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAA", poli1.getParty());
+        assertEquals("labour", poli1.getParty());
+        poli1.setParty("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        assertEquals("independent", poli1.getParty());
 
         assertEquals("Tipperary", poli1.getCounty());
         poli1.setCounty("Waterford");
         assertEquals("Waterford", poli1.getCounty());
-        poli1.setCounty("AAAAAAAAAAAAAAAAAAAAAAAA");
-        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAA", poli1.getCounty());
+        poli1.setCounty("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        assertEquals("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", poli1.getCounty());
     }
 
     @Test
