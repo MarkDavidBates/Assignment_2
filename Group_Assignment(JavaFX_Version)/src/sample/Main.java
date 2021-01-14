@@ -1,16 +1,25 @@
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
+package sample;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("mainMenu.fxml"));
+        primaryStage.setTitle("Hello World");
+        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.show();
+    }
 
     Scanner input;
     Lists<Politician> politicians;
+    Lists<Election> elections;
 
     public Main(){
         input = new Scanner(System.in);
@@ -18,11 +27,11 @@ public class Main {
         runMenu();
     }
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         new Main();
         Lists<Politician> politician = new Lists<>();
         System.out.println(politician.printList(""));
+        launch(args);
     }
 
     private void runMenu(){
@@ -43,9 +52,26 @@ public class Main {
                     startElection();
                     break;
                 case 5:
+                    listRunningElections();
+                    break;
+                case 6:
                     try{
                         politicians.save();
+                        elections.save();
                     }
+                    catch(Exception e){
+                        System.err.println("Error writing to file: " + e);
+                    }
+                    break;
+                case 7:
+                    try{
+                        politicians.load();
+                        elections.load();
+                    }
+                    catch(Exception e){
+                        System.err.println("Error loading from file: " + e);
+                    }
+                    break;
             }
         }
         while(answer != 0);
@@ -56,6 +82,11 @@ public class Main {
         System.out.println("2) list Politicians");
         System.out.println("3)Delete all Politicians");
         System.out.println("4) Start Election");
+        System.out.println("5) list Running Elections");
+        System.out.println("----------");
+        System.out.println("6) Save");
+        System.out.println("7) Load");
+        System.out.println("----------");
         System.out.println("0) exit");
         return ScannerInput.readNextInt("==>>");
     }
@@ -93,19 +124,11 @@ public class Main {
         int seats = ScannerInput.readNextInt("Number of seats: ");
 
         Election e = new Election(type, location, year, seats);
+        elections.addElement(e);
     }
 
-    public void load() throws Exception{
-     XStream xstream = new XStream(new DomDriver());
-     ObjectInputStream is = xstream.createObjectInputStream(new FileReader("data.xml"));
-     politicians = (Lists<Politician>) is.readObject();
-     is.close();
-     }
-
-     public void save() throws Exception{
-     XStream xstream = new XStream(new DomDriver());
-     ObjectOutputStream out = xstream.createObjectOutputStream(new FileWriter("data.xml"));
-     out.writeObject(politicians);
-     out.close();
-     }
+    public void listRunningElections(){
+        System.out.println("All Current Running Elections: ");
+        System.out.println(elections.listElections());
+    }
 }

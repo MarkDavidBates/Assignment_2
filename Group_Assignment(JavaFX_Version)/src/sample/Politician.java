@@ -1,3 +1,5 @@
+package sample;
+
 import jdk.jshell.execution.Util;
 
 public class Politician {
